@@ -1,0 +1,744 @@
+import { StyleSheet, Text, View, Image, TouchableOpacity, FlatList, ScrollView, Modal, Dimensions } from 'react-native';
+import CheckBox from '@react-native-community/checkbox';
+import Closeicon12 from '../../assets/icons/close';
+import Detailsicon1 from '../../assets/icons/detail';
+import React, { useState, useEffect } from 'react';
+import Rightarrow1 from '../../assets/icons/righticon';
+import Svg, { Path } from "react-native-svg";
+import SvgComponent from '../../assets/icons/SvgComponent';
+import Addicon1 from '../../assets/icons/add';
+import Subicon1 from '../../assets/icons/minus';
+import Paymentbtn from '../payments/paymentbutton';
+import { useNavigation } from '@react-navigation/native';
+const catalogData = [
+  { id: '1', name: 'Chicken BBQ pizza', category: 'Burger', favorite: false, variants: '2 variants', available: true, image: 'https://images.unsplash.com/photo-1513104890138-7c749659a591?q=80&w=2370&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D', modalText: 'Delicious Chicken BBQ pizza with a blend of savory sauces and rich toppings.', sizes: ['Small', 'Medium', 'Large'], prices: { Small: '$8', Medium: '$10', Large: '$12' }, modalText1: 'Delicious Chicken BBQ pizza with a blend of savory sauces and rich toppings.', calories: 360, foodtype: 'Non-veg' },
+  { id: '2', name: 'French fries combo', category: 'Burger', favorite: false, available: true, image: 'https://s.yimg.com/ny/api/res/1.2/ayVo_1.k3lhURG9FtnXz2Q--/YXBwaWQ9aGlnaGxhbmRlcjt3PTE1NjA7aD04NzY7Y2Y9d2VicA--/https://media.zenfs.com/en/the_daily_meal_185/e68c815071adf1727198cdfdff4ab154', modalText: 'Delicious Chicken BBQ pizza with a blend of savory sauces and rich toppings.', sizes: ['Small', 'Medium', 'Large'], prices: { Small: '$8', Medium: '$10', Large: '$12' }, modalText1: 'Delicious Chicken BBQ pizza with a blend of savory sauces and rich toppings.', calories: 360, foodtype: 'Non-veg' },
+  { id: '3', name: 'Pan pizza', category: 'Burger', favorite: false, variants: '2 variants', available: true, image: 'https://www.thelondoneconomic.com/wp-content/uploads/2022/05/3181915b-cast-iron-frying-pan-pizza-recipe-jonathan-hatchman-london-economic-750x1000.jpg', modalText: 'Delicious Chicken BBQ pizza with a blend of savory sauces and rich toppings.', sizes: ['Small', 'Medium', 'Large'], prices: { Small: '$8', Medium: '$10', Large: '$12' }, modalText1: 'Delicious Chicken BBQ pizza with a blend of savory sauces and rich toppings.', calories: 360, foodtype: 'Non-veg' },
+  { id: '4', name: 'Mushroom Sandwich', category: 'Sandwich', variants: '2 variants', favorite: false, available: false, image: 'https://www.yummytummyaarthi.com/wp-content/uploads/2016/03/1-39.jpg', status: 'Out of stock', modalText: 'Delicious Chicken BBQ pizza with a blend of savory sauces and rich toppings.', sizes: ['Small', 'Medium', 'Large'], prices: { Small: '$8', Medium: '$10', Large: '$12' }, modalText1: 'Delicious Chicken BBQ pizza with a blend of savory sauces and rich toppings.', calories: 360, foodtype: 'Non-veg' },
+  { id: '5', name: 'Watermelon juice', category: 'Juice', favorite: false, available: true, image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRNtEEZay4hN1n1TYG-uv0aINQDbt9ycNDnKg&s', modalText: 'Delicious Chicken BBQ pizza with a blend of savory sauces and rich toppings.', sizes: ['Small', 'Medium', 'Large'], prices: { Small: '$8', Medium: '$10', Large: '$12' }, modalText1: 'Delicious Chicken BBQ pizza with a blend of savory sauces and rich toppings.', calories: 360, foodtype: 'Non-veg' },
+  { id: '6', name: 'Plain Nachos', category: 'Sandwich', variants: '2 variants', favorite: false, available: true, image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQRnpk5vcgDiwehjegZx_XnsQtmVsYmTuWIEg&s', modalText: 'Delicious Chicken BBQ pizza with a blend of savory sauces and rich toppings.', sizes: ['Small', 'Medium', 'Large'], prices: { Small: '$8', Medium: '$10', Large: '$12' }, modalText1: 'Delicious Chicken BBQ pizza with a blend of savory sauces and rich toppings.', calories: 360, foodtype: 'Non-veg' },
+  { id: '7', name: 'Mexican Nachos with salsa', category: 'Sandwich', favorite: false, available: false, image: 'https://i0.wp.com/nourishingamy.com/wp-content/uploads/2023/06/Black-Bean-Mango-Salsa-Nachos-with-Tahini-6.jpg?w=1365&ssl=1', status: 'Out of stock', modalText: 'Delicious Chicken BBQ pizza with a blend of savory sauces and rich toppings.', sizes: ['Small', 'Medium', 'Large'], prices: { Small: '$8', Medium: '$10', Large: '$12' }, modalText1: 'Delicious Chicken BBQ pizza with a blend of savory sauces and rich toppings.', calories: 360, foodtype: 'Non-veg' },
+  { id: '8', name: 'Grape juice', category: 'Juice', variants: '2 variants', favorite: false, available: true, image: 'https://cdn.healthyrecipes101.com/recipes/images/juices/is-apple-cider-vinegar-grape-juice-healthy-clambmxet00cipw1b77xm0wb3.webp?w=1080&q=80', modalText: 'Delicious Chicken BBQ pizza with a blend of savory sauces and rich toppings.', sizes: ['Small', 'Medium', 'Large'], prices: { Small: '$8', Medium: '$10', Large: '$12' }, modalText1: 'Delicious Chicken BBQ pizza with a blend of savory sauces and rich toppings.', calories: 360, foodtype: 'Non-veg' },
+  { id: '9', name: 'Mango juice with salad', category: 'Juice', favorite: false, available: false, image: 'https://veganfamilyrecipes.com/wp-content/uploads/2017/09/Mango-Balsamic-Vinaigrette-1.jpg', status: 'Unavailable', modalText: 'Delicious Chicken BBQ pizza with a blend of savory sauces and rich toppings.', sizes: ['Small', 'Medium', 'Large'], prices: { Small: '$8', Medium: '$10', Large: '$12' }, modalText1: 'Delicious Chicken BBQ pizza with a blend of savory sauces and rich toppings.', calories: 360, foodtype: 'Non-veg' },
+];
+const screenWidth = Dimensions.get('window').width;
+
+export default function CatalogDetail() {
+  const navigation = useNavigation();
+  const [orders, setOrders] = useState([]);
+  const [selectedSize, setSelectedSize] = useState(null);
+  const [totalPrice, setTotalPrice] = useState('');
+  const handleAddToOrder = () => {
+    if (modalContent && selectedSize) {
+      const itemPrice = modalContent.prices[selectedSize]; // Get the price of the selected size
+      const orderDetails = {
+        id: modalContent.id,
+        name: modalContent.name,
+        size: selectedSize,
+        count,
+        price: itemPrice // Add the item's price to orderDetails
+      };
+  
+      setOrders(prevOrders => [...prevOrders, orderDetails]);
+      console.log('Added to Order:', orderDetails);
+      navigation.navigate("Homescreen", { orderDetails: orderDetails });
+  
+      toggleAddItemModal();
+    } else {
+      console.log('Please select a size and ensure modalContent is set.');
+    }
+  };
+  
+  
+
+
+
+  const [selectedItem, setSelectedItem] = useState('All');
+  
+  const [isModalVisible, setModalVisible] = useState(false);
+  const [isAddItemModalVisible, setAddItemModalVisible] = useState(false);
+  const [modalContent, setModalContent] = useState({});
+  const catalogItems = ['All', 'Favourite', 'Burger', 'Sandwich', 'Juice', 'Pizza'];
+
+
+  const filteredData = selectedItem === 'All'
+    ? catalogData
+    : catalogData.filter(item => item.category === selectedItem);
+  const toggleModal = (item) => {
+    setModalContent(item);
+    setModalVisible(!isModalVisible);
+  };
+  const [count, setCount] = useState(1);
+  
+
+  const calculateTotalPrice = () => {
+    if (selectedSize && modalContent.prices) {
+      const price = modalContent.prices[selectedSize];
+      if (price) {
+        const parsedPrice = parseFloat(price.replace('$', ''));
+        const newTotal = (parsedPrice * count).toFixed(2);
+        setTotalPrice(newTotal);
+      } else {
+        setTotalPrice('0.00');
+      }
+    }
+  };
+
+
+  const incrementCount = () => {
+    setCount(prevCount => prevCount + 1);
+  };
+
+  const decrementCount = () => {
+    setCount(prevCount => Math.max(prevCount - 1, 1));
+  };
+  const CustomCheckbox = ({ size, price, selectedSize, setSelectedSize }) => {
+    const isChecked = selectedSize === size;
+
+    return (
+      <TouchableOpacity onPress={() => setSelectedSize(size)}>
+        <View style={styles.sizePriceRow}>
+          <View
+            style={{
+              width: 22,
+              height: 22,
+              borderWidth: 2,
+              borderColor: isChecked ? 'blue' : '#000',
+              justifyContent: 'center',
+              alignItems: 'center',
+              backgroundColor: isChecked ? 'blue' : 'transparent',
+              marginRight: 10,
+            }}
+          >
+            {isChecked && (
+              <Svg height="20" width="20">
+                <SvgComponent height="20px" width="20px" />
+              </Svg>
+            )}
+          </View>
+
+          <Text
+            style={[
+              styles.sizeText,
+              {
+                color: isChecked ? 'blue' : 'black',
+                marginRight: 'auto'
+              }
+            ]}
+          >
+            {size}
+          </Text>
+
+          <Text
+            style={[
+              styles.priceText,
+              {
+                color: isChecked ? 'blue' : 'black',
+              }
+            ]}
+          >
+            {price}
+          </Text>
+        </View>
+      </TouchableOpacity>
+    );
+  };
+
+
+
+
+
+  const [selectedVariant, setSelectedVariant] = useState('Variants (2)');
+
+  
+  const [selectedPrice, setSelectedPrice] = useState('');
+  useEffect(() => {
+    calculateTotalPrice();
+  }, [count, selectedSize, modalContent.prices]);
+  useEffect(() => {
+    if (modalContent?.sizes?.length > 0) {
+      setSelectedSize(modalContent.sizes[0]);
+    }
+  }, [modalContent]);
+
+  useEffect(() => {
+    if (selectedSize && modalContent.prices) {
+      calculateTotalPrice();
+    }
+  }, [selectedSize, modalContent.prices]);
+
+  const toggleAddItemModal = () => {
+    setAddItemModalVisible(!isAddItemModalVisible);
+    console.log("Add Item Modal Toggled:", !isAddItemModalVisible);
+  };
+  const renderItem = ({ item }) => {
+    const truncatedName = item.name.length > 15 ? item.name.substring(0, 15) + '...' : item.name;
+    return (
+      <TouchableOpacity
+        style={[styles.itemContainer, !item.available && styles.itemUnavailable]}
+        onPress={() => item.available && toggleModal(item)}
+      >
+        <Image source={{ uri: item.image }} style={styles.itemImage} />
+        <View style={styles.detailsIconContainer}>
+          <TouchableOpacity onPress={() => toggleModal(item)}>
+            <Detailsicon1 />
+          </TouchableOpacity>
+        </View>
+        <View style={styles.itemInfo}>
+          <Text style={styles.itemName}>{truncatedName}</Text>
+          <Text style={styles.itemVariants}>{item.variants}</Text>
+          {item.status && <Text style={styles.itemStatus}>{item.status}</Text>}
+        </View>
+      </TouchableOpacity>
+    );
+  };
+
+  return (
+    <View style={styles.container}>
+      <ScrollView horizontal={true} showsHorizontalScrollIndicator={false} style={styles.scrollContainer}>
+        {catalogItems.map((item, index) => (
+          <TouchableOpacity
+            key={index}
+            onPress={() => setSelectedItem(item)}
+            style={[
+              styles.item,
+              selectedItem === item && styles.selectedItem,
+            ]}
+          >
+            <Text style={[styles.text, selectedItem === item && styles.selectedText]}>{item}</Text>
+          </TouchableOpacity>
+        ))}
+      </ScrollView>
+
+      {filteredData.length > 0 ? (
+        <FlatList
+          data={filteredData}
+          renderItem={renderItem}
+          keyExtractor={item => item.id}
+          numColumns={3}
+          contentContainerStyle={styles.flatListContainer}
+        />
+      ) : (
+        <View style={styles.noDataContainer}>
+          <Text style={styles.noDataText}>No data available</Text>
+        </View>
+      )}
+      <Modal
+        animationType="slide"
+        transparent={true}
+        visible={isModalVisible}
+        onRequestClose={() => toggleModal({})}
+      >
+        <View style={styles.modalContainer}>
+          <View style={styles.modalContent}>
+            <Image
+              source={{ uri: modalContent.image }}
+              style={styles.modalImage}
+            />
+            <TouchableOpacity style={styles.closeIcon} onPress={() => toggleModal({})}>
+              <View style={styles.circleBackground}>
+                <Closeicon12 />
+              </View>
+            </TouchableOpacity>
+
+            <Text style={styles.modalText}>{modalContent.modalText}</Text>
+
+            {modalContent.sizes && (
+              <View style={styles.sizesContainer}>
+                {modalContent.sizes
+                  .sort((a, b) => {
+                    const order = ['Small', 'Medium', 'Large'];
+                    return order.indexOf(a) - order.indexOf(b);
+                  })
+                  .map((size, index) => (
+                    <View key={index} style={styles.sizePriceRow}>
+                      <Text style={styles.sizeText}>{size}</Text>
+                      <Text style={styles.priceText}>{modalContent.prices[size]}</Text>
+                    </View>
+                  ))}
+              </View>
+            )}
+            <Text style={styles.modalText1}>{modalContent.modalText1}</Text>
+
+            <View style={styles.line} />
+
+            <View style={styles.calorieContainer}>
+              <View style={styles.calorieInfo}>
+                <Text style={styles.calorieText}>Calories per 100g</Text>
+                <Text style={styles.calorieValue}>{modalContent.calories} kcal</Text>
+              </View>
+              <View style={styles.foodTypeInfo}>
+                <Text style={styles.calorieText}>Food type</Text>
+                <Text style={styles.calorieValue}>{modalContent.foodtype}</Text>
+              </View>
+            </View>
+
+            <View style={styles.line} />
+            <TouchableOpacity style={styles.addItemButton} onPress={toggleAddItemModal}>
+              <Text style={styles.addItemButtonText}>Add Item</Text>
+            </TouchableOpacity>
+
+          </View>
+        </View>
+      </Modal>
+      <Modal
+        animationType="slide"
+        transparent={true}
+        visible={isAddItemModalVisible}
+        onRequestClose={toggleAddItemModal}
+      >
+        <View style={styles.modalContainer}>
+          <View style={styles.modalContent}>
+            <Text style={styles.modalTitle}>Variants & Add-ons</Text>
+
+            <View style={styles.textImageContainer}>
+              {modalContent?.image && (
+                <Image source={{ uri: modalContent.image }} style={styles.addonImage} />
+              )}
+
+              <View style={{ flex: 2 }}>
+                <Text style={styles.modalText2}>{modalContent?.modalText1}</Text>
+              </View>
+            </View>
+
+
+            <View style={styles.variantsAddOnsContainer}>
+              <TouchableOpacity
+                style={[
+                  styles.button,
+                  selectedVariant === 'Variants (2)' && styles.selectedButton,
+                ]}
+                onPress={() => setSelectedVariant('Variants (2)')}
+              >
+                <Text style={[styles.variantsText, selectedVariant === 'Variants (2)' && styles.variantsTextselected]}>
+                  Variants (2)
+                </Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={[
+                  styles.button,
+                  selectedVariant === 'Add-ons' && styles.selectedButton,
+                ]}
+                onPress={() => setSelectedVariant('Add-ons')}
+              >
+                <Text style={[styles.addOnsText, selectedVariant === 'Add-ons' && styles.addOnsTextselected]}>
+                  Add-ons
+                </Text>
+              </TouchableOpacity>
+            </View>
+
+            <Text style={{ color: "black", fontWeight: "500", fontSize: 17, marginTop: 13 }}>
+              Quantity
+            </Text>
+            <View style={styles.sizePriceContainer}>
+              {modalContent?.sizes?.map((size, index) => (
+                <React.Fragment key={size}>
+                  <CustomCheckbox
+                    size={size}
+                    price={modalContent.prices[size]}
+                    selectedSize={selectedSize}
+                    setSelectedSize={setSelectedSize}
+                  />
+                  {/* Divider line */}
+                  {index < modalContent.sizes.length - 1 && <View style={styles.divider} />}
+                </React.Fragment>
+              ))}
+            </View>
+
+            {selectedSize && (
+              <View style={{ flexDirection: 'row', justifyContent: 'space-between', width: '100%' }}>
+                <Text style={{ color: 'black', fontSize: 18 }}>Total Price:</Text>
+                <Text style={{ color: 'black', fontSize: 18 }}>${totalPrice}</Text>
+              </View>
+            )}
+
+
+
+            <TouchableOpacity style={styles.closeIcon} onPress={toggleAddItemModal}>
+              <View style={styles.circleBackground}>
+                <Rightarrow1 />
+              </View>
+            </TouchableOpacity>
+            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+              <View style={[styles.count, {
+                borderWidth: 1,
+                borderColor: 'black',
+                flexDirection: 'row',
+                alignItems: 'center',
+                width: '40%',
+                justifyContent: 'space-between',
+                borderRadius: 5,
+                height: 50,
+                marginTop: 5
+              }]}>
+                <TouchableOpacity onPress={decrementCount}>
+                  <Subicon1 style={{ marginLeft: 10 }} />
+                </TouchableOpacity>
+                <Text>{count}</Text>
+                <TouchableOpacity onPress={incrementCount}>
+                  <Addicon1 style={{ marginRight: 10 }} />
+                </TouchableOpacity>
+              </View>
+
+              <TouchableOpacity
+                style={[styles.addItemButton1, { height: 50, borderRadius: 5, marginLeft: 10 }]}
+                onPress={() => {
+                  handleAddToOrder(); // Call the function here
+                  toggleAddItemModal(); // Close the modal
+                }}
+              >
+                <Text style={styles.addItemButtonText}>Add To Order</Text>
+              </TouchableOpacity>
+
+            </View>
+
+
+
+
+          </View>
+        </View>
+      </Modal>
+      <Paymentbtn />
+    </View>
+  );
+}
+const styles = StyleSheet.create({
+  container: {
+    marginTop: 10,
+  },
+  scrollContainer: {
+    paddingHorizontal: 10,
+  },
+  item: {
+    padding: 10,
+    marginHorizontal: 5,
+    borderWidth: 1,
+    borderColor: '#ccc',
+    borderRadius: 10,
+    backgroundColor: '#f9f9f9',
+  },
+  textImageContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'flex-start',
+    width: '100%',
+  },
+  selectedItem: {
+    borderColor: '#007BFF',
+    backgroundColor: '#007BFF',
+  },
+  text: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    textAlign: 'center',
+    color: '#000',
+  },
+  selectedText: {
+    color: '#fff',
+  },
+  flatListContainer: {
+    padding: 10,
+  },
+  itemContainer: {
+    flex: 1,
+    margin: 5,
+    backgroundColor: '#fff',
+    borderRadius: 10,
+    overflow: 'hidden',
+    borderWidth: 1,
+    borderColor: '#ddd',
+  },
+  itemUnavailable: {
+    opacity: 0.35,
+  },
+  itemImage: {
+    width: '100%',
+    height: 100,
+    resizeMode: 'cover',
+  },
+  itemInfo: {
+    padding: 10,
+  },
+  itemName: {
+    fontSize: 12,
+    fontWeight: 'bold',
+    color: 'black',
+  },
+  itemVariants: {
+    fontSize: 10,
+    color: '#666',
+  },
+  itemStatus: {
+    fontSize: 10,
+    color: 'red',
+    fontWeight: 'bold',
+  },
+  noDataContainer: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    height: 100,
+  },
+  noDataText: {
+    fontSize: 16,
+    color: '#888',
+  },
+  variantsText: {
+    fontSize: 14,
+    color: 'black',
+    marginTop: 10,
+    fontWeight: 'bold',
+  },
+  modalContainer: {
+    flex: 1,
+    justifyContent: 'flex-end',
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+  },
+  modalContent: {
+    backgroundColor: '#fff',
+    padding: 20,
+    borderTopLeftRadius: 10,
+    borderTopRightRadius: 10,
+    alignItems: 'flex-start',
+    width: screenWidth,
+    maxHeight: '90%',
+  },
+  modalImage: {
+    width: screenWidth * 0.9,
+    height: screenWidth * 0.6,
+    marginBottom: 10,
+    resizeMode: 'cover',
+  },
+  modalTitle: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    marginBottom: 10,
+    alignSelf: 'flex-start',
+    color: "black",
+  },
+  modalText: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    textAlign: 'left',
+    marginBottom: 10,
+    alignSelf: 'flex-start',
+  },
+
+  sizeText: {
+    flex: 1,
+    fontSize: 14,
+    color: '#555',
+    textAlign: 'left',
+  },
+  modalText2: {
+    flex: 2,
+    fontSize: 14,
+    color: 'black',
+    marginLeft: 10,
+  },
+  sizePriceRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    width: '100%',
+  },
+  priceText: {
+    flex: 1,
+    fontSize: 14,
+    color: '#000',
+    textAlign: 'right',
+  },
+  line: {
+    height: 1,
+    backgroundColor: '#ccc',
+    width: '100%',
+    marginVertical: 10,
+  },
+  calorieContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    width: '100%',
+    marginTop: 10,
+  },
+  calorieInfo: {
+    alignItems: 'flex-start',
+  },
+  foodTypeInfo: {
+    alignItems: 'flex-end',
+  },
+  calorieText: {
+    color: "grey",
+  },
+  closeIcon: {
+    position: 'absolute',
+    top: 10,
+    right: 10,
+  },
+  circleBackground: {
+    width: 40,
+    height: 40,
+    borderRadius: 20,
+    backgroundColor: '#fff',
+    justifyContent: 'center',
+    alignItems: 'center',
+    elevation: 5,
+  },
+  addItemButton: {
+    backgroundColor: '#007BFF',
+    padding: 15,
+    borderRadius: 5,
+    alignItems: 'center',
+    marginTop: 10,
+    width: "100%",
+  },
+  addItemButton1: {
+    backgroundColor: '#007BFF',
+    padding: 15,
+    borderRadius: 5,
+    alignItems: 'center',
+    marginTop: 10,
+    width: "60%",
+  },
+
+  addItemButtonText: {
+    color: "white",
+    fontSize: 16,
+    fontWeight: "bold",
+    letterSpacing: 2,
+  },
+
+  detailsIconContainer: {
+    position: 'absolute',
+    top: 10,
+    right: 10,
+  },
+  addonImage: {
+    flex: 1,
+    width: screenWidth * 0.3,
+    height: screenWidth * 0.3,
+    borderRadius: 10,
+    resizeMode: 'cover',
+  },
+  rowContainer: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    width: '100%',
+  },
+  variantsContainer: {
+    backgroundColor: '#007BFF',
+    borderWidth: 1,
+    borderColor: '#0056b3',
+    borderRadius: 5,
+    padding: 10,
+    marginRight: 0,
+    flex: 1,
+    alignItems: 'center',
+  },
+  addonsContainer: {
+    backgroundColor: '#007BFF',
+    borderWidth: 1,
+    borderColor: '#0056b3',
+    borderRadius: 5,
+    padding: 10,
+    marginLeft: 0,
+    flex: 1,
+    alignItems: 'center',
+  },
+  sectionTitle: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    color: '#fff',
+    textAlign: 'center',
+    marginBottom: 5,
+  },
+  sizePriceContainer: {
+    marginTop: 15,
+    marginBottom: 10,
+  },
+  sizePriceRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    width: '100%',
+    paddingVertical: 5,
+  },
+  sizeText: {
+    flex: 1,
+    fontSize: 14,
+    color: '#555',
+    textAlign: 'left',
+  },
+  priceText: {
+    fontSize: 14,
+    color: '#000',
+    textAlign: 'right',
+    flex: 0,
+  },
+  divider: {
+    height: 1,
+    backgroundColor: 'lightgray',
+    marginVertical: 5,
+  },
+  checkbox: {
+    width: 20,
+    height: 20,
+    borderWidth: 1,
+    borderColor: 'lightgray',
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginRight: 10,
+  },
+  checkedCheckbox: {
+    width: 14,
+    height: 14,
+    backgroundColor: 'blue',
+  },
+  variantsAddOnsContainer: {
+    flexDirection: 'row',
+    marginTop: 10,
+    marginBottom: 10,
+    justifyContent: 'center',
+    alignItems: 'center',
+    alignSelf: 'center',
+    borderWidth: 1,
+    borderColor: 'lightgray',
+    borderRadius: 5,
+  },
+  variantsText: {
+    fontSize: 17,
+    fontWeight: '500',
+    color: 'black',
+    padding: 10,
+    paddingHorizontal: 45,
+    borderRadius: 5,
+  },
+  variantsTextselected: {
+    fontSize: 17,
+    fontWeight: '500',
+    color: 'white',
+    backgroundColor: 'blue',
+    padding: 10,
+    paddingHorizontal: 45,
+    borderRadius: 5,
+  },
+  addOnsText: {
+    color: 'black',
+    fontSize: 17,
+    fontWeight: '500',
+    padding: 10,
+    paddingHorizontal: 45,
+    borderRadius: 5,
+  },
+  addOnsTextselected: {
+    color: 'white',
+    backgroundColor: 'blue',
+    fontSize: 17,
+    fontWeight: '500',
+    padding: 10,
+    paddingHorizontal: 45,
+    borderRadius: 5,
+  },
+  selectedPriceText: {
+    fontWeight: 'bold',
+    marginTop: 10,
+    paddingRight: 20,
+  },
+});

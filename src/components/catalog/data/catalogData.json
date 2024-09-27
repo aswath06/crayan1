@@ -1,0 +1,256 @@
+[
+  {
+    "id": "1",
+    "name": "Chicken BBQ pizza",
+    "category": "Burger",
+    "favorite": false,
+    "variants": "2 variants",
+    "available": true,
+    "image": "https://images.unsplash.com/photo-1513104890138-7c749659a591?q=80&w=2370&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    "modalText": "Delicious Chicken BBQ pizza with a blend of savory sauces and rich toppings.",
+    "sizes": ["Small", "Medium", "Large"],
+    "prices": {
+      "Small": "SAR 30",
+      "Medium": "SAR 38",
+      "Large": "SAR 45"
+    },
+    "modalText1": "Pizza is a popular dish consisting of a round, flattened base of leavened wheat-based dough topped with tomatoes, cheese, and various other ingredients, which is then baked at a high temperature. It is often serveric.",
+    "calories": 360,
+    "foodtype": "Non-veg",
+    "toppings": [
+      { "name": "Vegetable Patty", "price": "SAR 5.63" },
+      { "name": "Grated Cheese", "price": "SAR 3.75" },
+      { "name": "Paneer", "price": "SAR 6.56" }
+    ],
+    "beverages": [
+      { "name": "Coke 150 ml", "price": "SAR 5.63" },
+      { "name": "Coke 250 ml", "price": "SAR 7.50" },
+      { "name": "Grape Juice", "price": "SAR 9.38" }
+    ]
+  },
+  {
+    "id": "2",
+    "name": "French fries combo",
+    "category": "Burger",
+    "favorite": false,
+    "available": true,
+    "image": "https://s.yimg.com/ny/api/res/1.2/ayVo_1.k3lhURG9FtnXz2Q--/YXBwaWQ9aGlnaGxhbmRlcjt3PTE1NjA7aD04NzY7Y2Y9d2VicA--/https://media.zenfs.com/en/the_daily_meal_185/e68c815071adf1727198cdfdff4ab154",
+    "modalText": "Crispy French fries served with a delicious dipping sauce.",
+    "sizes": ["Small", "Medium", "Large"],
+    "prices": {
+      "Small": "SAR 15",
+      "Medium": "SAR 19",
+      "Large": "SAR 22.50"
+    },
+    "modalText1": "Enjoy our crispy fries, perfect for snacking or as a side.",
+    "calories": 290,
+    "foodtype": "Veg",
+    "toppings": [
+      { "name": "Vegetable Patty", "price": "SAR 5.63" },
+      { "name": "Grated Cheese", "price": "SAR 3.75" },
+      { "name": "Paneer", "price": "SAR 6.56" }
+    ],
+    "beverages": [
+      { "name": "Coke 150 ml", "price": "SAR 5.63" },
+      { "name": "Coke 250 ml", "price": "SAR 7.50" },
+      { "name": "Grape Juice", "price": "SAR 9.38" }
+    ]
+  },
+  {
+    "id": "3",
+    "name": "Pan pizza",
+    "category": "Burger",
+    "favorite": false,
+    "variants": "2 variants",
+    "available": true,
+    "image": "https://www.thelondoneconomic.com/wp-content/uploads/2022/05/3181915b-cast-iron-frying-pan-pizza-recipe-jonathan-hatchman-london-economic-750x1000.jpg",
+    "modalText": "A delicious pan pizza topped with your choice of ingredients.",
+    "sizes": ["Small", "Medium", "Large"],
+    "prices": {
+      "Small": "SAR 34",
+      "Medium": "SAR 41",
+      "Large": "SAR 49"
+    },
+    "modalText1": "Satisfy your pizza cravings with our classic pan pizza.",
+    "calories": 400,
+    "foodtype": "Non-veg",
+    "toppings": [
+      { "name": "Olives", "price": "SAR 3.75" },
+      { "name": "Jalapenos", "price": "SAR 4.69" }
+    ],
+    "beverages": [
+      { "name": "Coke 150 ml", "price": "SAR 5.63" },
+      { "name": "Coke 250 ml", "price": "SAR 7.50" },
+      { "name": "Grape Juice", "price": "SAR 9.38" }
+    ]
+  },
+  {
+    "id": "4",
+    "name": "Mushroom Sandwich",
+    "category": "Sandwich",
+    "variants": "2 variants",
+    "favorite": false,
+    "available": false,
+    "image": "https://www.yummytummyaarthi.com/wp-content/uploads/2016/03/1-39.jpg",
+    "status": "Out of stock",
+    "modalText": "A hearty mushroom sandwich with fresh vegetables.",
+    "sizes": ["Small", "Medium", "Large"],
+    "prices": {
+      "Small": "SAR 19",
+      "Medium": "SAR 22.50",
+      "Large": "SAR 26.25"
+    },
+    "modalText1": "Delicious and filling mushroom sandwich.",
+    "calories": 250,
+    "foodtype": "Veg",
+    "toppings": [
+      { "name": "Avocado", "price": "SAR 5.63" },
+      { "name": "Cheese", "price": "SAR 3.75" },
+      { "name": "Lettuce", "price": "SAR 1.88" },
+      { "name": "Tomato", "price": "SAR 2.81" }
+    ],
+    "beverages": [
+      { "name": "Coke 150 ml", "price": "SAR 5.63" },
+      { "name": "Coke 250 ml", "price": "SAR 7.50" },
+      { "name": "Grape Juice", "price": "SAR 9.38" },
+      { "name": "Sprite 150 ml", "price": "SAR 5.63" },
+      { "name": "Fanta 250 ml", "price": "SAR 7.50" },
+      { "name": "Lemonade", "price": "SAR 7.50" }
+    ]
+  },
+  {
+    "id": "5",
+    "name": "Watermelon Juice",
+    "category": "Juice",
+    "favorite": false,
+    "available": true,
+    "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRNtEEZay4hN1n1TYG-uv0aINQDbt9ycNDnKg&s",
+    "modalText": "Refreshing watermelon juice for a hot day.",
+    "sizes": ["Small", "Medium", "Large"],
+    "prices": {
+      "Small": "SAR 11.25",
+      "Medium": "SAR 15",
+      "Large": "SAR 18.75"
+    },
+    "modalText1": "Stay hydrated with our delicious watermelon juice.",
+    "calories": 100,
+    "foodtype": "Veg",
+    "toppings": [      { "name": "Avocado", "price": "SAR 5.63" },
+    { "name": "Cheese", "price": "SAR 3.75" }],
+    "beverages": [      { "name": "Coke 150 ml", "price": "SAR 5.63" },
+    { "name": "Coke 250 ml", "price": "SAR 7.50" }]
+  },
+  {
+    "id": "6",
+    "name": "Veggie Delight Pizza",
+    "category": "Pizza",
+    "favorite": true,
+    "variants": "2 variants",
+    "available": true,
+    "image": "https://imgs.search.brave.com/ji0_843_IsrZbUO3jaz5CiNCDh6aJZ02LpedtPVvfyk/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9tZWRp/YS5nZXR0eWltYWdl/cy5jb20vaWQvMTMx/OTE0MTc1Ni9waG90/by9waXp6YS10aGUt/dWx0aW1hdGUtZmVl/bC1nb29kLWZvb2Qu/anBnP3M9NjEyeDYx/MiZ3PTAmaz0yMCZj/PVVSUXlGNGpUZUNK/UXJXZDlVck5ZcXR0/c3FRRzJZQk5YRmlT/T3QwY0JlUmM9",
+    "modalText": "Veggie Delight Pizza loaded with fresh vegetables.",
+    "sizes": ["Small", "Medium", "Large"],
+    "prices": {
+      "Small": "SAR 33.75",
+      "Medium": "SAR 41.25",
+      "Large": "SAR 48.75"
+    },
+    "modalText1": "A delicious pizza made with a variety of fresh vegetables.",
+    "calories": 350,
+    "foodtype": "Veg",
+    "toppings": [
+      { "name": "Bell Peppers", "price": "SAR 3.75" },
+      { "name": "Extra Cheese", "price": "SAR 5.63" }
+    ],
+    "beverages": [
+      { "name": "Coke 150 ml", "price": "SAR 5.63" },
+      { "name": "Coke 250 ml", "price": "SAR 7.50" },
+      { "name": "Grape Juice", "price": "SAR 9.38" }
+    ]
+  },
+  {
+    "id": "7",
+    "name": "Mango",
+    "category": "Juice",
+    "favorite": false,
+    "variants": "2 variants",
+    "available": false ,
+    "image": "https://imgs.search.brave.com/rCrRUjQflwVgH61fd-KqHkK1UADrt0xpQI6SQxKQi_o/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly90My5m/dGNkbi5uZXQvanBn/LzA4LzczLzI4LzA2/LzM2MF9GXzg3MzI4/MDY2NF9QRHkxY1Bz/YnJHa2Q0Q3kwWnBq/eE9Dajl1ajk3S1JX/QS5qcGc",
+    "modalText": "Veggie Delight Pizza loaded with fresh vegetables.",
+    "sizes": ["Small", "Medium", "Large"],
+    "status": "Not aviable",
+    "prices": {
+      "Small": "SAR 33.75",
+      "Medium": "SAR 41.25",
+      "Large": "SAR 48.75"
+    },
+    "modalText1": "A delicious mango juice test test  test",
+    "calories": 350,
+    "foodtype": "Veg",
+    "toppings": [
+      { "name": "Bell Peppers", "price": "SAR 3.75" },
+      { "name": "Extra Cheese", "price": "SAR 5.63" }
+    ],
+    "beverages": [
+      { "name": "Coke 150 ml", "price": "SAR 5.63" },
+      { "name": "Coke 250 ml", "price": "SAR 7.50" },
+      { "name": "Grape Juice", "price": "SAR 9.38" }
+    ]
+  },
+  {
+    "id": "7",
+    "name": "Grape Juice",
+    "category": "Juice",
+    "favorite": false,
+    "variants": "2 variants",
+    "available": true ,
+    "image": "https://imgs.search.brave.com/H9XcWrUQFJZH8o1_JJbseqDoFcaGR3pW9U-S_tRGsIw/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9tZWRp/YS5pc3RvY2twaG90/by5jb20vaWQvMTAy/MTYyODQ1OC9waG90/by9ncmFwZS1qdWlj/ZS5qcGc_cz02MTJ4/NjEyJnc9MCZrPTIw/JmM9RlRtX2o5ZzVL/azRzQi1FX1RrWHZw/U29qZ3dfbFFER2NC/TERoUENJWk91dz0",
+    "modalText": "Veggie Delight Pizza loaded with fresh vegetables.",
+    "sizes": ["Small", "Medium", "Large"],
+    "prices": {
+      "Small": "SAR 33.75",
+      "Medium": "SAR 41.25",
+      "Large": "SAR 48.75"
+    },
+    "modalText1": "A delicious mango juice test test  test",
+    "calories": 350,
+    "foodtype": "Veg",
+    "toppings": [
+      { "name": "Bell Peppers", "price": "SAR 3.75" },
+      { "name": "Extra Cheese", "price": "SAR 5.63" }
+    ],
+    "beverages": [
+      { "name": "Coke 150 ml", "price": "SAR 5.63" },
+      { "name": "Coke 250 ml", "price": "SAR 7.50" },
+      { "name": "Grape Juice", "price": "SAR 9.38" }
+    ]
+  },  {
+    "id": "8",
+    "name": "Browine cake",
+    "category": "Sandwich",
+    "favorite": false,
+    "variants": "2 variants",
+    "available": false ,
+    "image": "https://imgs.search.brave.com/TcY-v1GlbpaAIe7YD6lKGdzmDwXHW45I99tNjaOVRQQ/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9idXR0/ZXJudXRiYWtlcnli/bG9nLmNvbS93cC1j/b250ZW50L3VwbG9h/ZHMvMjAyMS8wNy9i/cm93bmllLWNha2Ut/NjgzeDEwMjQuanBn",
+    "modalText": "Veggie Delight Pizza loaded with fresh vegetables.",
+    "sizes": ["Small", "Medium", "Large"],
+    "status":"Out of stock",
+    "prices": {
+      "Small": "SAR 33.75",
+      "Medium": "SAR 41.25",
+      "Large": "SAR 48.75"
+    },
+    "modalText1": "A delicious mango juice test test  test",
+    "calories": 350,
+    "foodtype": "Veg",
+    "toppings": [
+      { "name": "Bell Peppers", "price": "SAR 3.75" },
+      { "name": "Extra Cheese", "price": "SAR 5.63" }
+    ],
+    "beverages": [
+      { "name": "Coke 150 ml", "price": "SAR 5.63" },
+      { "name": "Coke 250 ml", "price": "SAR 7.50" },
+      { "name": "Grape Juice", "price": "SAR 9.38" }
+    ]
+  }
+]
